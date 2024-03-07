@@ -20,8 +20,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'phone' => ['required', 'phone', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'lion_id' => ['required', 'lion_id', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'phone' => ['required',  'max:255', Rule::unique('users')->ignore($user->id)],
+            'lion_id' => ['required',  'max:255', Rule::unique('users')->ignore($user->id)],
 
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
