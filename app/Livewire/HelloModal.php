@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Livewire;
+use LivewireUI\Modal\ModalComponent;
 
 use Livewire\Component;
 
-class HelloModal extends Component
+class HelloModal extends ModalComponent
 {
     public function render()
     {

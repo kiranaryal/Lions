@@ -42,7 +42,7 @@
         </div>
 
         @stack('modals')
-        @livewire('livewire-ui-modal')
+        @livewire('wire-elements-modal')
 
 
         @livewireScripts
