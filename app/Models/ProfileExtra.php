@@ -4,34 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-use Illuminate\Support\Str;
-
-class Profile extends Model
+class ProfileExtra extends Model
 {
-    use HasFactory;
 
-    protected $fillable = [
-        'full_name',
-        'position',
-        'home_club',
-        'public_email',
-        'public_phone',
-        'nationality',
-        'city',
-        'address',
-        'about',
-        'photo',
-    ];
-    public function user()
+    use HasFactory;
+    protected $guarded = [];
+    public function profile()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Profile::class);
     }
-    public function profileExtra()
-    {
-        return $this->hasMany(ProfileExtra::class);
-    }
+
+
 
     public function getImage()
     {
@@ -52,7 +38,7 @@ class Profile extends Model
         $randomName = Str::uuid()->toString();
 
         // Store the new photo with the generated name
-        $path = $photo->storeAs('profiles', $randomName . '.' . $photo->extension(), 'public');
+        $path = $photo->storeAs('profilesExtra', $randomName . '.' . $photo->extension(), 'public');
 
         // Update the user's profile photo path in the database
         $this->update(['photo' => $path]);

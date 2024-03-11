@@ -35,6 +35,7 @@ class ProfileForm extends Component
         $profile = $user->profile;
 
         if ($profile) {
+            $this->profile = $profile;
             $this->full_name = $profile->full_name;
             $this->position = $profile->position;
             $this->home_club = $profile->home_club;
@@ -45,15 +46,19 @@ class ProfileForm extends Component
             $this->address = $profile->address;
             $this->about = $profile->about;
             $this->photo = $profile->getImage();
-
-            // Add other fields as needed
         }
     }
     public function updatedPhoto()
     {
+        if (auth()->user()->id != $this->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->validate([
             'photo' => 'image|max:20048', // Adjust the max file size as needed
         ]);
+        auth()->user()->profile->updatePhoto($this->photo);
+
     }
 
     public function store()
@@ -69,16 +74,15 @@ class ProfileForm extends Component
             'city' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'about' => 'required|string',
+            'photo'=>''
 
         ]);
         if (auth()->user()->id != $this->id) {
             abort(403, 'Unauthorized action.');
         }
-        if ($this->photo) {
-            auth()->user()->profile->updateProfilePhoto($this->photo);
-        }
 
-        auth()->user()->profile()->update([
+
+        $pro = auth()->user()->profile()->update([
         'full_name' => $this->full_name,
         'position' => $this->position,
         'home_club' => $this->home_club,
@@ -89,6 +93,7 @@ class ProfileForm extends Component
         'address' => $this->address,
         'about' => $this->about,
         ]);
+
     }
 
 

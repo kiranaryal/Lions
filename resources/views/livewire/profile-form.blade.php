@@ -1,12 +1,10 @@
 <div>
     <x-profile-form  submit="store" >
 
-
         <x-slot name="form">
-            <div class="col-span-12 md:grid md:grid-cols-12 gap-10 ">
+            <div class="col-span-12 xl:grid xl:grid-cols-12 gap-10 ">
 
                 <div class="col-span-6 flex items-center justify-center bg-gray-200 rounded-3xl shadow-lg">
-                    {{-- <img src="{{ asset('images/team-01.png') }}" alt="" class="mx-auto object-cover h-96"> --}}
                     <div x-data="{ photoName: null, photoPreview: null }" class="">
                         <!-- Profile Photo File Input -->
                         <input type="file" id="photo" class="hidden"  x-ref="photo"  wire:model.live="photo"
@@ -21,7 +19,7 @@
 
                         <!-- Current Profile Photo -->
                         <div class="mt-2" x-show="! photoPreview">
-                            <img src="{{ $this->photo }}" class="mx-auto object-cover h-96 object-cover">
+                            <img src="{{ $this->photo=='/storage/' ? $this->profile->user->profile_photo_url: $this->photo }}" class="mx-auto object-cover h-96 rounded">
                         </div>
 
                         <!-- New Profile Photo Preview -->
@@ -30,7 +28,7 @@
                                 x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                             </span>
                         </div>
-                        <x-input-error for="photo" class="mt-2" />
+                        <x-input-error for="photo" class="mt-2 " />
 
                         @if(auth()->id() == $id)
                         <div class=" ">

@@ -4,6 +4,9 @@
             {{ __('Your Profile') }}
         </h2>
     </x-slot>
-@livewire('profile-form')
+    @livewire('profile-form')
+    @livewire('profile-form-extra')
+    @livewire('profile-form-details')
+
 
 </x-app-layout>

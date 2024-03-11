@@ -15,11 +15,14 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('profile',auth()->user()->id ?? '1' ) }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('profile',auth()->user()->id ?? '1' ) }}" :active="request()->routeIs('profile')">
                         {{ __('Profile') }}
-                    </x-nav-link> <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Business') }}
-                    </x-nav-link> <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    </x-nav-link>
+
+                        <x-nav-link href="{{ route('business_profile',auth()->user()->id ?? '1' ) }}" :active="request()->routeIs('business_profile')">
+                            {{ __('Business') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('News') }}
                     </x-nav-link>
                 </div>
@@ -160,9 +163,9 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('profile',auth()->user()->id ?? '1' ) }}" :active="request()->routeIs('profile')">
                 {{ __('Profile') }}
-            </x-responsive-nav-link> <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            </x-responsive-nav-link> <x-responsive-nav-link href="{{ route('business_profile',auth()->user()->id ?? '1' ) }}" :active="request()->routeIs('business_profile')">
                 {{ __('Business') }}
             </x-responsive-nav-link> <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('News') }}
