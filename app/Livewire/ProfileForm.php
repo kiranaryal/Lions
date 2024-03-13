@@ -11,7 +11,7 @@ class ProfileForm extends Component
 {
     use WithFileUploads;
     public $id;
-
+    public $profile;
     public $full_name;
     public $position;
     public $home_club;
@@ -33,9 +33,8 @@ class ProfileForm extends Component
 
         $user = User::find($this->id);
         $profile = $user->profile;
-
+        $this->profile = $profile;
         if ($profile) {
-            $this->profile = $profile;
             $this->full_name = $profile->full_name;
             $this->position = $profile->position;
             $this->home_club = $profile->home_club;
@@ -60,6 +59,7 @@ class ProfileForm extends Component
         auth()->user()->profile->updatePhoto($this->photo);
 
     }
+
 
     public function store()
     {
@@ -93,7 +93,7 @@ class ProfileForm extends Component
         'address' => $this->address,
         'about' => $this->about,
         ]);
-
+    $this->render();
     }
 
 

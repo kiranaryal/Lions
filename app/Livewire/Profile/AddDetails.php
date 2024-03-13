@@ -1,45 +1,30 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Profile;
 
 use Livewire\Component;
 use App\Models\User;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Route;
 use App\Models\ProfileExtra;
+use LivewireUI\Modal\ModalComponent;
 
-
-
-
-class ProfileFormExtra extends Component
+class AddDetails extends ModalComponent
 {
-    use WithFileUploads;
-    public $id;
 
+    use WithFileUploads;
     public $profile;
     public $profileExtras = [];
-
     public $category;
     public $org_name;
     public $position;
     public $date;
     public $photo;
-
-    public $showForm = false;
-
-    // Other properties and methods...
-
-    public function toggleForm()
-    {
-        $this->showForm = !$this->showForm;
-    }
+    public int $user;
 
 
     public function mount()
     {
-        $this->id = Route::current()->parameter('user');
-
-        $user = User::find($this->id);
+        $user = User::find($this->user);
         $this->profileExtra = $user->profile->profileExtra;
     }
 
@@ -54,10 +39,6 @@ class ProfileFormExtra extends Component
             'photo' => '',
 
         ]);
-        if (auth()->user()->id != $this->id) {
-            abort(403, 'Unauthorized action.');
-        }
-
         $profile = ProfileExtra::create([
             'category' => $this->category,
             'org_name' => $this->org_name,
@@ -69,16 +50,14 @@ class ProfileFormExtra extends Component
         if ($this->photo) {
             $profile->updatePhoto($this->photo);
         }
-        $this->showForm = false;
-        $this->js('window.location.reload()');
+        else{
+
+            $this->closeModal();
+            $this->js('window.location.reload()');
+        }
 
 
     }
-    public function closeModal()
-    {
-        $this->showForm = false;
-    }
-
 
 
     public function updatedPhoto()
@@ -88,9 +67,8 @@ class ProfileFormExtra extends Component
         ]);
     }
 
-
     public function render()
     {
-        return view('livewire.profile-form-extra');
+        return view('livewire.profile.add-details');
     }
 }

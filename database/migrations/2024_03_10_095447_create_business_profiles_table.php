@@ -22,12 +22,13 @@ return new class extends Migration
             $table->text('city')->nullable();
             $table->text('email')->nullable();
             $table->text('phone')->nullable();
+            $table->text('services')->nullable();
             $table->text('website')->nullable();
             $table->text('facebook')->nullable();
             $table->text('instagram')->nullable();
             $table->text('linkedin')->nullable();
             $table->text('about')->nullable();
-
+            $table->text('verified')->nullable();
             $table->timestamps();
         });
     }

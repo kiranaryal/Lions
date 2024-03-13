@@ -5,7 +5,7 @@
             {{ __('Your Business') }}
         </h2>
             <button class="ml-auto border border-gray-300 px-2 py-1 rounded-lg shadow bg-green-500/60 font-bold"
-            onclick="Livewire.dispatch('openModal', { component: 'hello-modal' })">
+            onclick="Livewire.dispatch('openModal', { component: 'business.add-business' })">
 
                 Add Business
             </button>

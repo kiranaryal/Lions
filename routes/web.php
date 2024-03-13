@@ -22,5 +22,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile/{user:id}', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
 
+
     Route::get('/business/{user:id}', [App\Http\Controllers\BusinessProfileController::class, 'business_profile'])->name('business_profile');
+    Route::get('/businessProfile/{business:id}', [App\Http\Controllers\BusinessProfileController::class, 'business_show'])->name('business_show');
+
 });

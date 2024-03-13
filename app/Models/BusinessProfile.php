@@ -21,10 +21,13 @@ class BusinessProfile extends Model
         'email',
         'phone',
         'website',
+        'services',
+
         'facebook',
         'instagram',
         'linkedin',
         'about',
+        'user_id',
     ];
 
     public function user()
@@ -32,7 +35,7 @@ class BusinessProfile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getImage()
+    public function getPhoto()
     {
         if (str_starts_with($this->photo, 'http')) {
             return $this->photo;
@@ -58,27 +61,32 @@ class BusinessProfile extends Model
     }
     public function getLogo()
     {
-        if (str_starts_with($this->photo, 'http')) {
-            return $this->photo;
+        if (str_starts_with($this->logo, 'http')) {
+            return $this->logo;
         }
-        return '/storage/' . $this->photo;
+        return '/storage/' . $this->logo;
 
     }
-    public function updateLogo($photo)
+    public function updateLogo($logo)
     {
-        // Delete the old photo if it exists
-        if ($this->photo) {
-            Storage::disk('public')->delete($this->photo);
+        // Delete the old logo if it exists
+        if ($this->logo) {
+            Storage::disk('public')->delete($this->logo);
         }
 
-        // Generate a random name for the new photo
+        // Generate a random name for the new logo
         $randomName = Str::uuid()->toString();
 
-        // Store the new photo with the generated name
-        $path = $photo->storeAs('Business', $randomName . '.' . $photo->extension(), 'public');
+        // Store the new logo with the generated name
+        $path = $logo->storeAs('Business', $randomName . '.' . $logo->extension(), 'public');
 
-        // Update the user's profile photo path in the database
-        $this->update(['photo' => $path]);
+        // Update the user's profile logo path in the database
+        $this->update(['logo' => $path]);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
+
