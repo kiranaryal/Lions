@@ -221,7 +221,7 @@
 
                         <x-label for="" class="col-span-12 w-full text-center text-xl" value="{{ __('Add more') }}" />
 
-                        <select wire:model="selectedCategories" id="categories" multiple="multiple" >
+                        <select wire:model="selectedCategories" id="categories" class="border-none w-full rounded" >
                             @foreach($this->category as $cate)
                                 <option value="{{ $cate->id }}">{{ $cate->name }}</option>
                             @endforeach
@@ -236,8 +236,6 @@
 
                     </div>
                 </div>
-
-
         </x-slot>
         <x-slot name="actions">
             <x-action-message on="store">

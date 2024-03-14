@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 ->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/news', [App\Http\Controllers\HomeController::class, 'news'])->name('news');
+
     Route::get('/profile/{user:id}', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
 
 

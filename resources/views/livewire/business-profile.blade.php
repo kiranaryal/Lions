@@ -18,13 +18,13 @@
                     @if ($this->id = auth()->id())
                     <button
                      wire:click="$dispatch('openModal', { component: 'business.edit-business', arguments: { id: {{ $business->id }} }})"
-                    class=" bg-green-600/80 rounded-full px-3 text-gray-100 font-bold shadow-md shadow-green-900">
-                        edit
-                        </button>
+                    class="bg-transparent text-green-600/80  px-3 font-bold">
+                    <i class="fa-regular fa-pen-to-square fa-2xl"></i>
+                </button>
                         <button   wire:click="removeBusiness({{ $business->id }})"
-                        class=" bg-red-600/80 rounded-full px-3 text-gray-100 font-bold shadow-md shadow-red-900">
-                            Delete
-                        </button>
+                        class="bg-transparent text-red-600/80  px-3 font-bold">
+                        <i class="fa-solid fa-trash fa-2xl"></i>
+                    </button>
                     @endif
                 </div>
             </div>

@@ -22,7 +22,7 @@
                         <x-nav-link href="{{ route('business_profile',auth()->user()->id ?? '1' ) }}" :active="request()->routeIs('business_profile')">
                             {{ __('Business') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-nav-link href="{{ route('news') }}" :active="request()->routeIs('news')">
                         {{ __('News') }}
                     </x-nav-link>
                 </div>
@@ -167,7 +167,7 @@
                 {{ __('Profile') }}
             </x-responsive-nav-link> <x-responsive-nav-link href="{{ route('business_profile',auth()->user()->id ?? '1' ) }}" :active="request()->routeIs('business_profile')">
                 {{ __('Business') }}
-            </x-responsive-nav-link> <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            </x-responsive-nav-link> <x-responsive-nav-link href="{{ route('news') }}" :active="request()->routeIs('news')">
                 {{ __('News') }}
             </x-responsive-nav-link>
         </div>

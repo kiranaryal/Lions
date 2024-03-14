@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\BusinessProfile;
 use App\Models\BusinessCategory;
+use App\Models\Profile;
+
 
 
 class Search extends Component
@@ -13,7 +15,8 @@ class Search extends Component
     public $business = false;
     public $profile = false;
 
-    public $searchResult= ['business'=>''];
+    public $searchResult= ['business'=>'',
+                           'profile'];
 
 
     public $selectedCategoryId;
@@ -51,15 +54,21 @@ class Search extends Component
                              ->orWhere('phone', 'like', '%'.$searchTerm.'%');
                 });
             })->get();
-
         }
-
         if ($this->profile) {
             $searchCriteria .= 'Profile ';
+            $this->searchResult['profile'] = Profile::where(function ($query) use ( $searchTerm) {
+                $query->where(function ($subQuery) use ($searchTerm) {
+                    $subQuery->where('full_name', 'like', '%'.$searchTerm.'%')
+                             ->orWhere('home_club', 'like', '%'.$searchTerm.'%')
+                             ->orWhere('public_email', 'like', '%'.$searchTerm.'%')
+                             ->orWhere('public_phone', 'like', '%'.$searchTerm.'%');
+                });
+            })->get();
 
         }
 
-$this->render();
+        $this->render();
 
     }
 
@@ -71,7 +80,10 @@ $this->render();
     }
 
     public function mount(){
-
+        $this->profile = 1;
+        $this->business = 1;
+        $this->searchResult['profile'] = Profile::inRandomOrder()->limit(5)->get();
+        $this->searchResult['business'] = BusinessProfile::inRandomOrder()->limit(5)->get();
     }
 
 

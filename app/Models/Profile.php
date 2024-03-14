@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class Profile extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     protected $fillable = [
         'full_name',

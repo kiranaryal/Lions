@@ -50,11 +50,9 @@ class AddDetails extends ModalComponent
         if ($this->photo) {
             $profile->updatePhoto($this->photo);
         }
-        else{
 
             $this->closeModal();
             $this->js('window.location.reload()');
-        }
 
 
     }

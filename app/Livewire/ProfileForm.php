@@ -57,6 +57,9 @@ class ProfileForm extends Component
             'photo' => 'image|max:20048', // Adjust the max file size as needed
         ]);
         auth()->user()->profile->updatePhoto($this->photo);
+        $this->render();
+        $this->js('window.location.reload()');
+
 
     }
 

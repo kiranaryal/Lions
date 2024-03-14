@@ -21,10 +21,10 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased ">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-repeat bg-contain" style="background-image: url('{{ asset('images/paper-texture.jpg') }}'); background-color: rgba(255, 255, 255, 0.5);">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -48,7 +48,7 @@
         @stack('modals')
         @livewire('wire-elements-modal')
 
-
+    @include('footer')
         @livewireScripts
     </body>
 </html>

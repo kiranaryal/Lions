@@ -89,6 +89,11 @@
                                 Education/ Experience</option>
                             <option value="education">Education</option>
                             <option value="experience">Experience</option>
+                            <option value="skill">Skills</option>
+                            <option value="certification">Certifications</option>
+
+
+
                         </select>
                         <x-input-error for="category" class="mt-2" />
                     </div>

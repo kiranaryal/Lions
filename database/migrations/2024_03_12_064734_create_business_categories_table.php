@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('business_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_profile_id')->index();
-            $table->foreignId('category_id')->index();
+            $table->foreignId('category_id')->nullable()->constrained("categories")->nullOnDelete();
+
             $table->timestamps();
         });
     }

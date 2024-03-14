@@ -1,10 +1,17 @@
-<div>
+<div class="relative">
+    @if(auth()->id() == $id)
+
+    <button class="absolute right-0 top-[-20px] border border-gray-300 px-2 py-1 rounded-lg shadow bg-green-500/60 font-bold"
+    onclick="Livewire.dispatch('openModal', { component: 'profile.add-details', arguments: { user: {{ auth()->user()->id }} }})">
+        Add Details
+    </button>
+    @endif
     <x-profile-form  submit="store" >
 
         <x-slot name="form">
             <div class="col-span-12 xl:grid xl:grid-cols-12 gap-10 ">
 
-                <div class="col-span-6 flex items-center justify-center bg-gray-200 rounded-3xl shadow-lg">
+                <div class="col-span-6 flex items-center justify-center relative">
                     <div x-data="{ photoName: null, photoPreview: null }" class="">
                         <!-- Profile Photo File Input -->
                         <input type="file" id="photo" class="hidden"  x-ref="photo"  wire:model.live="photo"
@@ -19,23 +26,14 @@
 
                         <!-- Current Profile Photo -->
                         <div class="mt-2" x-show="! photoPreview">
-                            <img src="{{ $this->photo=='/storage/' ? $this->profile->user->profile_photo_url: $this->photo }}" class="mx-auto object-cover h-96 rounded">
-                        </div>
-
-                        <!-- New Profile Photo Preview -->
-                        <div class="mt-2" x-show="photoPreview" style="display: none;">
-                            <span class="block mx-auto h-96 bg-cover bg-no-repeat bg-center"
-                                x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
-                            </span>
+                            <img src="{{ $this->photo =='/storage/' ? $this->profile->user->profile_photo_url: $this->photo }}" class="mx-auto object-cover h-96 rounded-3xl shadow-lg ">
                         </div>
                         <x-input-error for="photo" class="mt-2 " />
 
                         @if(auth()->id() == $id)
-                        <div class=" ">
-                            <x-secondary-button class="mt-2 me-2 text-center mx-10" type="button" x-on:click.prevent="$refs.photo.click()">
-                                {{ __('Select A New Photo') }}
-                            </x-secondary-button>
-                        </div>
+                            <div class="absolute top-10 right-2 bg-opaque hover:cursor-pointer	 bg-blur" type="button" x-on:click.prevent="$refs.photo.click()">
+                                <i class="fa-solid fa-photo-film fa-2xl" style="color:red"></i>
+                            </div>
 
                         @endif
                     </div>
@@ -43,10 +41,11 @@
                 </div>
                     <div class="col-span-6 ">
                         <div class="bg-white rounded-3xl m-5 shadow-lg">
-                            <div class="col-span-12 ">
+                            <div class="col-span-12  flex items-center px-3">
+                                <i class="fa-solid fa-user"></i>
                                 <input id="full_name" type="text"
                                     class="
-                         my-1 block w-full px-3 bg-white text-center font-bold
+                         mb-1 block w-full px-3 bg-white text-center font-bold text-xl
                         border-none rounded-3xl
                         focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
                         focus:invalid:border-pink-300 focus:invalid:ring-pink-300
@@ -55,10 +54,10 @@
                                     placeholder="Full Name" @if(auth()->id() != $id) disabled @endif/>
                                 <x-input-error for="full_name" class="mt-2" />
                             </div>
-                            <div class="col-span-12 ">
+                            <div class="col-span-12 flex items-center  ">
                                 <input id="position" type="text"
-                                    class="my-1 block w-full px-3  bg-white text-center font-bold
-                        border-none rounded-3xl
+                                    class=" block w-full px-3  bg-white text-center
+                        border-none rounded-3xl font-bold
                         focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
                         focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
                                     wire:model.defer="position" required autocomplete="position"
@@ -69,21 +68,19 @@
                         </div>
                         <div class="bg-white rounded-3xl m-5 shadow-lg">
 
-                            <div class="col-span-12 flex items-center px-2 ">
-                                <x-label for="home_club" value="{{ __('Home Club :') }}"
-                                    class="text-lg font-bold text-gray-400  whitespace-nowrap" />
+                            <div class="col-span-12 flex items-center px-2 flex px-3 ">
+                                <i class="fa-solid fa-house-flag"></i>
                                 <input id="home_club" type="text"
                                     class="my-1 py-1 bg-white  font-bold
-                    border-none rounded-lg w-full flex-shrink shrink
-                    focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
-                    focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
+                                            border-none rounded-lg w-full flex-shrink shrink
+                                            focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
+                                            focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
                                     wire:model.defer="home_club" required autocomplete="home_club"  @if(auth()->id() != $id) disabled @endif/>
                                 <x-input-error for="home_club" class="mt-2" />
                             </div>
-                            <div class="col-span-12 flex items-center px-2 ">
-                                <x-label for="public_email" value="{{ __('Public Email :') }}"
-                                    class="text-lg font-bold text-gray-400  whitespace-nowrap " />
+                            <div class="col-span-12 flex items-center px-2 flex items-center px-3">
 
+                                <i class="fa-solid fa-at"></i>
                                 <input id="public_email" type="email"
                                     class="   my-1 block  px-3 py-1 bg-white  font-bold
                     border-none rounded-lg w-full
@@ -92,9 +89,8 @@
                                     wire:model.defer="public_email" required autocomplete="public_email"  @if(auth()->id() != $id) disabled @endif />
                                 <x-input-error for="public_email" class="mt-2" />
                             </div>
-                            <div class="col-span-12 flex items-center px-2 ">
-                                <x-label for="public_phone" value="{{ __('Public Phone :') }}"
-                                    class="text-lg font-bold text-gray-400  whitespace-nowrap " />
+                            <div class="col-span-12 flex items-center px-2 flex px-3 items-center">
+                                <i class="fa-solid fa-phone-volume"></i>
 
                                 <input id="public_phone" type="text"
                                     class="   my-1 block  px-3 py-1 bg-white  font-bold
@@ -106,41 +102,39 @@
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-3xl grid grid-cols-4 m-5 shadow-xl">
-                            <div class="col-span-1 flex items-center justify-center">
-                                <img src="{{ asset('images/nepal.png') }}" alt="" class=" mx-auto p-4">
-                            </div>
-                            <div class="col-span-3">
-                                <div class="col-span-12 ">
+                        <div class=" rounded-3xl m-5 shadow-lg m-5 bg-white py-3">
+                                <div class="col-span-12  flex items-center px-3">
+                                    <i class="fa-solid fa-city"></i>
                                     <input id="address" type="text"
-                                        class="   my-1 block w-full px-3 py-1 bg-white  font-bold
-                    border-none rounded-lg
+                                        class="   my-1 block w-full px-3 py-1 bg-white
+                    border-none rounded-lg capitalize font-bold
                     focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
                     focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
                                         wire:model.defer="address" required autocomplete="address"
                                         placeholder="Address"  @if(auth()->id() != $id) disabled @endif />
                                     <x-input-error for="address" class="mt-2" />
                                 </div>
-                                <div class="col-span-12 ">
+                                <div class="col-span-12 flex items-center px-3">
+                                    <i class="fa-solid fa-address-book"></i>
                                     <input id="city" type="text"
-                                        class="   my-1 block w-full px-3 py-1 bg-white  font-bold
-                    border-none rounded-lg
+                                        class="   my-1 block w-full px-3 py-1 bg-white
+                    border-none rounded-lg capitalize font-bold
                     focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
                     focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
                                         wire:model.defer="city" required autocomplete="city" placeholder="City"  @if(auth()->id() != $id) disabled @endif/>
                                     <x-input-error for="city" class="mt-2" />
                                 </div>
-                                <div class="col-span-12 ">
+                                <div class="col-span-12 flex items-center px-3">
+                                    <i class="fa-solid fa-flag"></i>
                                     <input id="nationality" type="text"
-                                        class="   my-1 block w-full px-3 py-1 bg-white  font-bold
-                        border-none rounded-lg
+                                        class="   my-1 block w-full px-3 py-1 bg-white
+                        border-none rounded-lg font-bold
                         focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
-                        focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
+                        focus:invalid:border-pink-300 focus:invalid:ring-pink-300 capitalize"
                                         wire:model.defer="nationality" required autocomplete="nationality"
                                         placeholder="Nationality"  @if(auth()->id() != $id) disabled @endif />
                                     <x-input-error for="nationality" class="mt-2" />
                                 </div>
-                            </div>
                         </div>
 
                     </div>
@@ -155,16 +149,25 @@
 
 
         </x-slot>
-        @if(auth()->id() == $id)
-        <x-slot name="actions">
-            <x-action-message on="store">
-                {{ __('Profile information saved.') }}
-            </x-action-message>
+            @if(auth()->id() == $id)
+            <x-slot name="actions">
+                <x-action-message on="store">
+                    {{ __('Profile information saved.') }}
+                </x-action-message>
 
-            <x-button>
-                {{ __('Save') }}
-            </x-button>
-        </x-slot>
-        @endif
+                <x-button>
+                    {{ __('Save') }}
+                </x-button>
+            </x-slot>
+            @endif
+            <x-slot name="details">
+                @livewire('profile-form-details')
+            </x-slot>
+
+
+
+
+
     </x-profile-form>
+
 </div>

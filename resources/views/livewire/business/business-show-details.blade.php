@@ -1,5 +1,5 @@
 <div>
-    <div class="bg-pink-50 rounded-3xl shadow-xl shadow-blue-100 max-w-7xl " >
+    <div class="bg-sky-100 rounded-3xl shadow-xl shadow-blue-100 max-w-7xl " >
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:m-5 p-5">
             <div class="col-span-1 lg:col-span-5 bg-gray-50 rounded-xl p-5 shadow-lg  ">
                 <div class="flex items-center">

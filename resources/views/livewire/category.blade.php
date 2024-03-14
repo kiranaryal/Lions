@@ -1,5 +1,5 @@
 <div>
-    <div class="bg-white rounded-3xl w-full md:max-w-xs mt-5">
+    <div class="bg-white rounded-3xl w-full md:max-w-xs mt-5 shadow-lg">
         <div class="flex md:flex-col p-5 py-2 space-y-2 max-h-[200px] md:h-full overflow-y-auto space-x-2" >
             <div class="bg-white p-2 rounded-full text-center font-bold capitalize hover:cursor-pointer " wire:click="clear()">Categories</div>
             @foreach($this->category as $cat)

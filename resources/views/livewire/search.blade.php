@@ -25,27 +25,51 @@
             @livewire('category')
 
         </div>
-        <div class="col-span-2  bg-white mt-5 rounded-3xl">
-            <div class="m-5 bg-white shadow-lg rounded-xl">
+        <div class="col-span-2   mt-5 ">
+            <div class="m-5  shadow-lg bg-white rounded-3xl">
                 @if ($business)
 
                 @if($this->searchResult['business'] )
                 @foreach ($this->searchResult['business'] as $business)
-                <div class="sm:flex p-5">
+                <div class="sm:flex p-5 shadow-lg rounded-2xl">
                     <div class="min-w-32  rounded-full flex  justify-center items-center">
                         @if ($business->getLogo() != '/storage/')
                         <img src="{{ $business->getLogo() }}" alt="" class="w-24 h-24 object-cover bg-gray-100 rounded-full">
                         @endif
                     </div>
-                    <div class=" px-5 bg-gray-50 w-full rounded-l-xl">
+                    <div class=" px-5  w-full rounded-l-xl">
                         <a href="{{route('business_show',$business->id)}}" class="font-bold text-xl py-2 text-center sm:text-left">{{ $business->org_name }}</a>
-                        <p>{{ $business->email }}</p>
-                        <p>{{ $business->address }}</p>
-                        <p>{{ $business->phone }}</p>
-                        <p>{{ $business->website }}</p>
+                        <p class="flex items-center "> <i class="fa-solid fa-envelope pr-2"></i> {{ $business->email }}</p>
+                        <p class="flex items-center "> <i class="fa-solid fa-house pr-2"></i> {{ $business->address }}</p>
+                        <p class="flex items-center "> <i class="fa-solid fa-phone pr-2"></i> {{ $business->phone }}</p>
                     </div>
 
                 </div>
+                @endforeach
+                @endif
+                @endif
+
+
+                @if ($profile)
+
+                @if($this->searchResult['profile'] )
+                @foreach ($this->searchResult['profile'] as $profile)
+                @if($profile->full_name!=null && $profile->public_phone !=null && $profile->public_email !=null)
+                <div class="sm:flex p-5 shadow-lg rounded-2xl ">
+                    <div class="min-w-32  rounded-full flex  justify-center items-center ">
+                        @if ($profile->getImage() != '/storage/')
+                        <img src="{{ $profile->getImage() }}" alt="" class="w-24 h-24 object-cover rounded-full">
+                        @endif
+                    </div>
+                    <div class=" px-5  w-full rounded-l-xl">
+                        <a href="{{route('profile',$profile->id)}}" class="font-bold text-xl py-2 text-center sm:text-left">{{ $profile->full_name }}</a>
+                        <p class="flex items-center "> <i class="fa-solid fa-envelope pr-2"></i> {{ $profile->public_email }}</p>
+                        <p class="flex items-center "> <i class="fa-solid fa-house pr-2"></i> {{ $profile->address }}</p>
+                        <p class="flex items-center "> <i class="fa-solid fa-phone pr-2"></i> {{ $profile->public_phone }}</p>
+                    </div>
+
+                </div>
+                @endif
                 @endforeach
                 @endif
                 @endif
