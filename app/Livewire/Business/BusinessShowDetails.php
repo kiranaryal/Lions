@@ -17,8 +17,10 @@ class BusinessShowDetails extends Component
         public function toggleState()
     {
         $this->business = Business::find($this->id);
-        $this->business->status = !$this->business->status;
-        $this->business->save();
+        if( $this->business->user->id = auth()->id() ){
+            $this->business->status = !$this->business->status;
+            $this->business->save();
+        }
     }
 
     public function mount(){

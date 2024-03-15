@@ -67,16 +67,17 @@ class EditDetails extends ModalComponent
             'position' => $this->position,
             'date' => $this->date,
             'profile_id'=>auth()->user()->profile->id,
-
         ]);
-        if ($this->photo) {
+
+        $profile = ProfileExtra::find($profileExtra);
+                if (!is_string($this->photo)){
             $profile->updatePhoto($this->photo);
         }
-        else{
+
 
             $this->closeModal();
             $this->js('window.location.reload()');
-        }
+
 
 
     }
