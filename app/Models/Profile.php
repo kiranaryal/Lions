@@ -14,6 +14,7 @@ class Profile extends Model
     protected $guarded = [];
 
     protected $fillable = [
+        'user_id',
         'full_name',
         'position',
         'home_club',
