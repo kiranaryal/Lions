@@ -11,6 +11,7 @@
                         <div class="text-center px-5 font-bold text-lg sm:text-xl lg:text-2xl">
                             {{ $this->business->org_name }}</div>
                         <div>
+                            @if ($business->user->id == auth()->id())
 
                             <div>
                                 <h1>{{ $business->name }}</h1>
@@ -28,7 +29,7 @@
                                 <i class="fa-regular fa-pen-to-square fa-2xl"></i>
                             </button>
 
-
+                            @endif
                         </div>
                     </div>
                 </div>

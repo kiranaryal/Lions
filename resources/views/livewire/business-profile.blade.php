@@ -15,12 +15,12 @@
                     <p>{{ $business->website }}</p>
                 </div>
                 <div class="py-5 sm:py-0 px-5 bg-gray-50 text-center rounded-r-xl flex justify-end sm:flex-col sm:justify-around">
-                    @if ($this->id = auth()->id())
+                    @if ($business->user->id == auth()->id())
                     <button
                      wire:click="$dispatch('openModal', { component: 'business.edit-business', arguments: { id: {{ $business->id }} }})"
                     class="bg-transparent text-green-600/80  px-3 font-bold">
                     <i class="fa-regular fa-pen-to-square fa-2xl"></i>
-                </button>
+                     </button>
                         <button   wire:click="removeBusiness({{ $business->id }})"
                         class="bg-transparent text-red-600/80  px-3 font-bold">
                         <i class="fa-solid fa-trash fa-2xl"></i>
