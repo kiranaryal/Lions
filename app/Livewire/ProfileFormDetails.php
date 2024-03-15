@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Route;
 use App\Models\ProfileExtra;
+use App\Models\Profile;
+
 use App\Models\User;
 use Livewire\WithFileUploads;
 
@@ -34,7 +36,7 @@ class ProfileFormDetails extends Component
 
         $this->id = Route::current()->parameter('user');
         $user = User::find($this->id);
-        $this->profileExtra = $user->profile->profileExtra;
+        $this->profileExtra = Profile::where('user_id',$user_id)->profileExtra;
     }
 
 
