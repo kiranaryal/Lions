@@ -38,6 +38,8 @@ class BusinessProfileResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                ->relationship('user', 'name'),
                 TextInput::make('org_name')->required(),
                 TextInput::make('address')->required(),
                 TextInput::make('city')->required(),

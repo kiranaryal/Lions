@@ -24,10 +24,7 @@ class DatabaseSeeder extends Seeder
             'is_admin'=> true,
             'email_verified_at'=> date('h:i:s'),
         ]);
-        \App\Models\Category::create([
-            'name' => 'Business Services',
-            'icon' => '<i class="fa-solid fa-business-time"></i>',
-        ]);
+
         \App\Models\Category::create([
             'name' => 'Business Services',
             'icon' => '<i class="fa-solid fa-business-time"></i>',
