@@ -36,7 +36,7 @@ class ProfileFormDetails extends Component
 
         $this->id = Route::current()->parameter('user');
         $user = User::find($this->id);
-        $this->profileExtra = Profile::where('user_id',$user->id)->profileExtra;
+        $this->profileExtra = Profile::where('user_id',$user->id)->last()->profileExtra;
     }
 
 
