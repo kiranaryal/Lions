@@ -26,12 +26,15 @@ class Search extends Component
 
     public function toggleBusiness()
     {
-        $this->business = !$this->business;
+        $this->business = 1;
+        $this->profile = 0;
     }
 
     public function toggleProfile()
     {
-        $this->profile = !$this->profile;
+
+        $this->profile = 1;
+        $this->business = 0;
     }
 
     public function search()
@@ -76,7 +79,10 @@ class Search extends Component
     public function categorySelected($categoryId)
     {
         $this->selectedCategoryId = $categoryId;
+        $this->business = 1;
+        $this->profile = 0;
         $this->search();
+
     }
 
     public function mount(){

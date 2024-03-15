@@ -14,9 +14,9 @@
             </div>
             <div class=" col-span-6  md:col-span-4  flex rounded-full justify-center items-center shadow-lg @if($business || $profile)bg-blue-900 @else bg-white @endif  ">
                          <button wire:click="toggleBusiness"
-                             class="text-xl  hover:bg-blue-900 py-3 hover:text-gray-100 px-3 rounded-full  font-bold w-full h-full @if($business) bg-blue-900 text-gray-100 @else bg-white @endif">Business</button>
+                             class="text-xl   py-3  px-3 rounded-full  font-bold w-full h-full @if($business) bg-blue-900 text-gray-100 @else bg-white @endif">Business</button>
                          <button wire:click="toggleProfile"
-                             class="text-xl  hover:bg-blue-900 py-3 hover:text-gray-100 px-3 rounded-full font-bold w-full h-full @if($profile) bg-blue-900 text-gray-100  @else bg-white @endif">Profile</button>
+                             class="text-xl   py-3  px-3 rounded-full font-bold w-full h-full @if($profile) bg-blue-900 text-gray-100  @else bg-white @endif">Profile</button>
             </div>
         </div>
     </form>
