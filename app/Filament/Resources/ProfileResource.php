@@ -38,6 +38,8 @@ class ProfileResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                ->relationship('user', 'name'),
                 TextInput::make('full_name')->required(),
                 TextInput::make('public_email')->required(),
                 TextInput::make('public_phone')->required(),
@@ -53,7 +55,8 @@ class ProfileResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
+            ->columns([ Tables\Columns\TextColumn::make('user.name')->searchable()
+            ->sortable()->wrap(),
                 Tables\Columns\TextColumn::make('full_name')->searchable()
                 ->sortable()->wrap(),
                 Tables\Columns\TextColumn::make('public_email')->searchable()

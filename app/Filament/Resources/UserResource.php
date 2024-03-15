@@ -39,6 +39,8 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                        ->relationship('user', 'name'),
                 TextInput::make('name')->required(),
                 TextInput::make('email')->required(),
                 TextInput::make('lion_id')->required(),
