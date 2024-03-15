@@ -136,6 +136,11 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
+                            @if(auth()->user()->is_admin)
+                            <x-dropdown-link href="/admin">
+                                {{ __('Admin Dashboard') }}
+                            </x-dropdown-link>
+                            @endif
                         </x-slot>
                     </x-dropdown>
                 </div>

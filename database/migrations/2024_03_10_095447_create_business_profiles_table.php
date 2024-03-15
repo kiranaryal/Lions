@@ -28,7 +28,10 @@ return new class extends Migration
             $table->text('instagram')->nullable();
             $table->text('linkedin')->nullable();
             $table->text('about')->nullable();
-            $table->text('verified')->nullable();
+            $table->boolean('verified')->nullable();
+            $table->boolean('status')->nullable();
+            $table->boolean('featured')->nullable();
+
             $table->timestamps();
         });
     }

@@ -75,6 +75,7 @@
                                             border-none rounded-lg w-full flex-shrink shrink
                                             focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
                                             focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
+                                            placeholder="Home Club"
                                     wire:model.defer="home_club" required autocomplete="home_club"  @if(auth()->id() != $id) disabled @endif/>
                                 <x-input-error for="home_club" class="mt-2" />
                             </div>
@@ -86,6 +87,7 @@
                     border-none rounded-lg w-full
                     focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
                     focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
+                    placeholder="Email"
                                     wire:model.defer="public_email" required autocomplete="public_email"  @if(auth()->id() != $id) disabled @endif />
                                 <x-input-error for="public_email" class="mt-2" />
                             </div>
@@ -97,6 +99,7 @@
                     border-none rounded-lg w-full
                     focus:outline-none focus:border-pink-300 focus:ring-1 focus:ring-pink-300
                     focus:invalid:border-pink-300 focus:invalid:ring-pink-300"
+                    placeholder="Phone"
                                     wire:model.defer="public_phone" required autocomplete="public_phone"  @if(auth()->id() != $id) disabled @endif/>
                                 <x-input-error for="public_phone" class="mt-2" />
                             </div>
@@ -104,7 +107,8 @@
 
                         <div class=" rounded-3xl m-5 shadow-lg m-5 bg-white py-3">
                                 <div class="col-span-12  flex items-center px-3">
-                                    <i class="fa-solid fa-city"></i>
+                                    <i class="fa-solid fa-address-book"></i>
+
                                     <input id="address" type="text"
                                         class="   my-1 block w-full px-3 py-1 bg-white
                     border-none rounded-lg capitalize font-bold
@@ -115,7 +119,8 @@
                                     <x-input-error for="address" class="mt-2" />
                                 </div>
                                 <div class="col-span-12 flex items-center px-3">
-                                    <i class="fa-solid fa-address-book"></i>
+                                    <i class="fa-solid fa-city"></i>
+
                                     <input id="city" type="text"
                                         class="   my-1 block w-full px-3 py-1 bg-white
                     border-none rounded-lg capitalize font-bold

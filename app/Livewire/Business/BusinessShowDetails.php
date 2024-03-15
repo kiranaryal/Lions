@@ -12,6 +12,14 @@ class BusinessShowDetails extends Component
 {
     public $id;
     public $business;
+    public $isActive = false;
+
+        public function toggleState()
+    {
+        $this->business = Business::find($this->id);
+        $this->business->status = !$this->business->status;
+        $this->business->save();
+    }
 
     public function mount(){
         $this->id = Route::current()->parameter('business');

@@ -28,24 +28,23 @@
         <div class="col-span-2   mt-5 ">
             <div class="m-5  shadow-lg bg-white rounded-3xl">
                 @if ($business)
-
-                @if($this->searchResult['business'] )
-                @foreach ($this->searchResult['business'] as $business)
-                <div class="sm:flex p-5 shadow-lg rounded-2xl">
-                    <div class="min-w-32  rounded-full flex  justify-center items-center">
-                        @if ($business->getLogo() != '/storage/')
-                        <img src="{{ $business->getLogo() }}" alt="" class="w-24 h-24 object-cover bg-gray-100 rounded-full">
-                        @endif
+                @if ($this->searchResult['business'])
+                @foreach ($this->searchResult['business'] as $key=> $busi)
+                    <div class="sm:flex p-5 shadow-lg rounded-2xl">
+                        <div class="min-w-32 rounded-full flex justify-center items-center">
+                            @if ($busi->getLogo() != '/storage/')
+                                <img src="{{ $busi->getLogo() }}" alt="" class="w-24 h-24 object-cover bg-gray-100 rounded-full">
+                            @endif
+                        </div>
+                        <div class="px-5 w-full rounded-l-xl">
+                            <a href="{{ route('business_show', $busi->id) }}" class="font-bold text-xl py-2 text-center sm:text-left">{{ $busi->org_name }}</a>
+                            <p class="flex items-center"><i class="fa-solid fa-envelope pr-2"></i>{{ $busi->email }}</p>
+                            <p class="flex items-center"><i class="fa-solid fa-house pr-2"></i>{{ $busi->address }}</p>
+                            <p class="flex items-center"><i class="fa-solid fa-phone pr-2"></i>{{ $busi->phone }}</p>
+                        </div>
                     </div>
-                    <div class=" px-5  w-full rounded-l-xl">
-                        <a href="{{route('business_show',$business->id)}}" class="font-bold text-xl py-2 text-center sm:text-left">{{ $business->org_name }}</a>
-                        <p class="flex items-center "> <i class="fa-solid fa-envelope pr-2"></i> {{ $business->email }}</p>
-                        <p class="flex items-center "> <i class="fa-solid fa-house pr-2"></i> {{ $business->address }}</p>
-                        <p class="flex items-center "> <i class="fa-solid fa-phone pr-2"></i> {{ $business->phone }}</p>
-                    </div>
-
-                </div>
                 @endforeach
+                    {{-- {{ $this->searchResult['business']->links() }} --}}
                 @endif
                 @endif
 

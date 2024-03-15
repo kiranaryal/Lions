@@ -53,7 +53,7 @@ class Search extends Component
                              ->orWhere('email', 'like', '%'.$searchTerm.'%')
                              ->orWhere('phone', 'like', '%'.$searchTerm.'%');
                 });
-            })->get();
+            })->where('status',true)->limit(10)->get();
         }
         if ($this->profile) {
             $searchCriteria .= 'Profile ';
@@ -64,7 +64,7 @@ class Search extends Component
                              ->orWhere('public_email', 'like', '%'.$searchTerm.'%')
                              ->orWhere('public_phone', 'like', '%'.$searchTerm.'%');
                 });
-            })->get();
+            })->limit(10)->get();
 
         }
 
@@ -83,13 +83,8 @@ class Search extends Component
         $this->profile = 1;
         $this->business = 1;
         $this->searchResult['profile'] = Profile::inRandomOrder()->limit(5)->get();
-        $this->searchResult['business'] = BusinessProfile::inRandomOrder()->limit(5)->get();
+        $this->searchResult['business'] = BusinessProfile::where('status',true)->inRandomOrder()->limit(5)->get();
     }
-
-
-
-
-
 
     public function render()
     {
