@@ -145,7 +145,7 @@
                     </div>
                     <div class="col-span-12 ">
                         <x-label for="about" class=" text-center text-xl" value="{{ __('About') }}" />
-                        <textarea id="about" type="textarea" class=" w-full h-full border border-gray-300 rounded-lg text-center"
+                        <textarea id="about" type="textarea" class=" w-full h-48 border border-gray-300 rounded-lg text-center"
                             wire:model.defer="about" required autocomplete="about" placeholder="......"  @if(auth()->id() != $id) disabled @endif></textarea>
                         <x-input-error for="about" class="mt-2" />
                     </div>
