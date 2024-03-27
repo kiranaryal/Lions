@@ -4,7 +4,7 @@
     <div class="mt-5 md:mt-0 ">
 
         <form wire:submit="{{ $submit }}">
-            <div class="rounded-3xl  px-4 py-5 bg-gray-50 dark:bg-gray-800 sm:p-6 shadow-lg {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
+            <div class="rounded-3xl  px-4 py-5 bg-gray-50  sm:p-6 shadow-lg {{ isset($actions) ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md' }}">
                 <div class=" ">
                     {{ $form }}
                 </div>
