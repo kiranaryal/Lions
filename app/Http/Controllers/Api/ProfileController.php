@@ -148,6 +148,52 @@ class ProfileController extends Controller
             return response()->json(['error' => 'Failed to delete Profile Info'], 500);
         }
     }
+    public function updateProfileExtra(Request $request, $extra_id)
+    {
+        try {
+            // Find the ProfileExtra
+            $profileExtra = ProfileExtra::findOrFail($extra_id);
+
+            // Check if the authenticated user's profile ID matches the profile ID associated with the ProfileExtra
+            if (Auth::user()->profile->id != $profileExtra->profile_id) {
+                return response()->json(['error' => 'Forbidden'], 403);
+            }
+
+            // Validate the request input
+            $validator = Validator::make($request->all(), [
+                'category' => 'nullable|string',
+                'org_name' => 'nullable|string',
+                'position' => 'nullable|string',
+                'photo' => 'nullable|image|max:2048',
+            ]);
+
+            // Check if validation fails
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 422);
+            }
+
+            // Update ProfileExtra fields if provided
+            $profileExtra->fill([
+                'category' => $request->input('category', $profileExtra->category),
+                'org_name' => $request->input('org_name', $profileExtra->org_name),
+                'position' => $request->input('position', $profileExtra->position),
+            ]);
+
+            // Update photo if provided
+            if ($request->file('photo')) {
+                $profileExtra->updatePhoto($request->file('photo'));
+                $profileExtra->photo = $profileExtra->getImage();
+            }
+
+            // Save the updated ProfileExtra
+            $profileExtra->save();
+
+            return response()->json(['message' => 'Profile Extra updated successfully', 'profile_extra' => $profileExtra], 200);
+        } catch (\Exception $e) {
+            // Handle any exceptions
+            return response()->json(['error' => 'Failed to update Profile Extra'], 500);
+        }
+    }
 
 
 

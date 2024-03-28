@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return response()->json(['message' => 'Welcome to the API']);
 // });
 Route::get('profile/{user_id}', [App\Http\Controllers\Api\ProfileController::class, 'show']);
+Route::get('news', [App\Http\Controllers\Api\NewsController::class, 'showNews']);
 
 
 
@@ -32,6 +33,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('profile/{user_id}/upload-photo', [App\Http\Controllers\Api\ProfileController::class, 'uploadPhoto']);
 
     Route::post('profile/{profile_id}/extras', [App\Http\Controllers\Api\ProfileController::class, 'addProfileExtra']);
+    Route::put('profile/extras/update/{extra_id}', [App\Http\Controllers\Api\ProfileController::class, 'updateProfileExtra']);
+
     Route::delete('profile/extras/{extra_id}', [App\Http\Controllers\Api\ProfileController::class, 'deleteProfileExtra']);
 
 
