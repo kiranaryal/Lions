@@ -1,6 +1,6 @@
 
 <div class="sticky top-[100vh] bg-[#02519c] ">
-    <footer class=" max-w-7xl mx-auto  text-gray-200 dark:bg-gray-900">
+    <footer class=" max-w-7xl mx-auto  text-gray-200 ">
         <div class=" py-6 lg:py-8">
             <div class=" mx-10 md:mx-0 grid  grid-cols-1 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 ">
                 <div class="lg:col-span-3 md:col-span-2 sm:col-span-4 mb-6 md:mb-0">
@@ -14,7 +14,7 @@
                 grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-4">
                     <div>
 
-                        <ul class="text-white dark:text-gray-400  text-sm">
+                        <ul class="text-white   text-sm">
                             <li class="py-1">
                                 <a href=""
                                     class=" text-grey-100 hover:underline  flex-wrap">Lions Club International</a>
@@ -37,7 +37,7 @@
                     </div>
                     <div>
 
-                        <ul class="text-white dark:text-gray-400 text-sm">
+                        <ul class="text-white  text-sm">
                             <li class="py-1">
                                 <a href=""
                                     class=" text-grey-100 hover:underline  flex-wrap">District 325C</a>
@@ -59,7 +59,7 @@
                     </div>
                     <div>
 
-                        <ul class="text-white dark:text-gray-400  text-sm">
+                        <ul class="text-white   text-sm">
                             <li class="py-1">
                                 <a href=""
                                     class=" text-grey-100 hover:underline  flex-wrap">District 325H</a>
@@ -82,7 +82,7 @@
                     </div>
                     <div>
 
-                        <ul class="text-white dark:text-gray-400 text-sm">
+                        <ul class="text-white  text-sm">
                             <li class="py-1">
                                 <a href=""
                                     class=" text-grey-100 hover:underline  flex-wrap">District 325M</a>
@@ -110,7 +110,7 @@
 
                 <div class="col-span-1 md:col-span-3 flex my-4 justify-center self-center sm:mt-0">
 
-                    <a href="#" class="text-white hover:text-white dark:hover:text-white">
+                    <a href="#" class="text-white hover:text-white ">
                         <svg class=" h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 8 19">
                             <path fill-rule="evenodd"
@@ -119,7 +119,7 @@
                         </svg>
                         <span class=" text-grey-100 sr-only">Facebook page</span>
                     </a>
-                    <a href="#" class="text-white hover:text-white dark:hover:text-white ms-5">
+                    <a href="#" class="text-white hover:text-white  ms-5">
                         <svg class="h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 21 16">
                             <path
@@ -127,7 +127,7 @@
                         </svg>
                         <span class="text-grey-100 sr-only">Instagram</span>
                     </a>
-                    <a href="#" class="text-white hover:text-white dark:hover:text-white ms-5">
+                    <a href="#" class="text-white hover:text-white  ms-5">
                         <svg class=" h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor" viewBox="0 0 20 17">
                             <path fill-rule="evenodd"
