@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::post('/register', function (Request $request) {
-//     return response()->json(['message' => 'Welcome to the API']);
-// });
-Route::get('profile/{user_id}', [App\Http\Controllers\Api\ProfileController::class, 'show']);
-Route::get('news', [App\Http\Controllers\Api\NewsController::class, 'showNews']);
+    //     return response()->json(['message' => 'Welcome to the API']);
+    // });
+    Route::get('profile/{user_id}', [App\Http\Controllers\Api\ProfileController::class, 'show']);
+    Route::get('news', [App\Http\Controllers\Api\NewsController::class, 'showNews']);
+    Route::get('/categories', [App\Http\Controllers\Api\CategoryController::class, 'index']);
+    Route::get('/search', [App\Http\Controllers\Api\SearchController::class, 'search']);
+
 
 
 
@@ -34,8 +37,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('profile/{profile_id}/extras', [App\Http\Controllers\Api\ProfileController::class, 'addProfileExtra']);
     Route::put('profile/extras/update/{extra_id}', [App\Http\Controllers\Api\ProfileController::class, 'updateProfileExtra']);
-
     Route::delete('profile/extras/{extra_id}', [App\Http\Controllers\Api\ProfileController::class, 'deleteProfileExtra']);
+
+
+    Route::post('business-profiles', [App\Http\Controllers\Api\BusinessController::class, 'store']);
+    Route::put('/business-profiles/{id}', [App\Http\Controllers\Api\BusinessController::class, 'update']);
+    Route::delete('/business-profiles/{id}', [App\Http\Controllers\Api\BusinessController::class, 'destroy']);
+    Route::put('/business-profiles/{id}/toggle-status', [App\Http\Controllers\Api\BusinessController::class, 'toggleStatus']);
+
+    Route::put('/business-profiles/{profile_id}/categories', [App\Http\Controllers\Api\BusinessController::class, 'updateCategories']);
+
+
+
 
 
 });
