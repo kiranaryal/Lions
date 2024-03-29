@@ -16,6 +16,11 @@ class NewsController extends Controller
         $news = News::where('status', true)
                     ->orderBy('date', 'desc')
                     ->paginate($perPage, ['*'], 'page', $page);
+        foreach($news as $n){
+            $n->image = $n->getImage();
+
+        }
+
 
         return response()->json(['news' => $news], 200);
     }
