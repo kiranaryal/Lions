@@ -9,6 +9,11 @@ use App\Models\BusinessProfile;
 use Illuminate\Support\Facades\Validator;
 class BusinessController extends Controller
 {
+    public function getBusiness(){
+        $business = auth()->user()->businessProfile->all();
+        return response()->json(['message' => 'Business profile retrived successfully', 'business_profile' => $business], 201);
+
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
