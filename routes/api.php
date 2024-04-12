@@ -30,10 +30,16 @@ Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login'])
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout',[App\Http\Controllers\Api\AuthController::class, 'logout']);
-    Route::put('/user/update-profile', [App\Http\Controllers\Api\UserController::class, 'update']);
+    Route::put('/user/update-profile/{userId}', [App\Http\Controllers\Api\UserController::class, 'update']);
+    Route::get('/user/profile/{userId}', [App\Http\Controllers\Api\UserController::class, 'getUserProfile']);
 
-    Route::put('profile/{user_id}', [App\Http\Controllers\Api\ProfileController::class, 'update']);
-    Route::post('profile/{user_id}/upload-photo', [App\Http\Controllers\Api\ProfileController::class, 'uploadPhoto']);
+
+    
+
+    Route::put('profile', [App\Http\Controllers\Api\ProfileController::class, 'update']);
+    Route::post('profile/upload-photo', [App\Http\Controllers\Api\ProfileController::class, 'uploadPhoto']);
+    Route::get('profile', [App\Http\Controllers\Api\ProfileController::class, 'show']);
+
 
     Route::post('profile/{profile_id}/extras', [App\Http\Controllers\Api\ProfileController::class, 'addProfileExtra']);
     Route::put('profile/extras/update/{extra_id}', [App\Http\Controllers\Api\ProfileController::class, 'updateProfileExtra']);
