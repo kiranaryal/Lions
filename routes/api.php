@@ -21,9 +21,6 @@ use Illuminate\Support\Facades\Route;
     Route::get('/categories', [App\Http\Controllers\Api\CategoryController::class, 'index']);
     Route::get('/search', [App\Http\Controllers\Api\SearchController::class, 'search']);
 
-
-
-
 Route::post('/register',[App\Http\Controllers\Api\AuthController::class, 'register']);
 
 Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
@@ -46,11 +43,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/business-profiles/{id}', [App\Http\Controllers\Api\BusinessController::class, 'destroy']);
     Route::put('/business-profiles/{id}/toggle-status', [App\Http\Controllers\Api\BusinessController::class, 'toggleStatus']);
     Route::put('/business-profiles/{profile_id}/categories', [App\Http\Controllers\Api\BusinessController::class, 'updateCategories']);
-
-
-
-
-
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

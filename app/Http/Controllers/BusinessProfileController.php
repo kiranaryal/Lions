@@ -15,4 +15,6 @@ class BusinessProfileController extends Controller
     {
         return view('pages.BusinessShow');
     }
+
+    
 }

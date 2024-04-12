@@ -18,8 +18,8 @@ class BusinessController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'org_name' => 'required|string',
-            'logo' => 'nullable|string',
-            'photo' => 'nullable|string',
+            'logo' => 'nullable',
+            'photo' => 'nullable',
             'address' => 'nullable|string',
             'city' => 'nullable|string',
             'email' => 'nullable|email',
@@ -49,16 +49,16 @@ class BusinessController extends Controller
             'linkedin',
             'about',
         ]));
+        $businessProfile->save();
           // Update photo if provided
           if ($request->file('photo')) {
             $businessProfile->updatePhoto($request->file('photo'));
-            $businessProfile->photo = $businessProfile->getImage();
+            $businessProfile->photo = $businessProfile->getPhoto();
         }  // Update logo if provided
         if ($request->file('logo')) {
             $businessProfile->updateLogo($request->file('logo'));
             $businessProfile->logo = $businessProfile->getLogo();
         }
-        $businessProfile->save();
         return response()->json(['message' => 'Business profile created successfully', 'business_profile' => $businessProfile], 201);
     }
     public function destroy($id)
@@ -91,8 +91,8 @@ class BusinessController extends Controller
          // Validation
          $validator = Validator::make($request->all(), [
              'org_name' => 'nullable|string',
-             'logo' => 'nullable|string',
-             'photo' => 'nullable|string',
+             'logo' => 'nullable',
+             'photo' => 'nullable',
              'address' => 'nullable|string',
              'city' => 'nullable|string',
              'email' => 'nullable|email',
@@ -124,11 +124,12 @@ class BusinessController extends Controller
              'linkedin',
              'about',
          ]));
+         $businessProfile->save();
 
          // Update photo if provided
          if ($request->file('photo')) {
              $businessProfile->updatePhoto($request->file('photo'));
-             $businessProfile->photo = $businessProfile->getImage();
+             $businessProfile->photo = $businessProfile->getPhoto();
          }
 
          // Update logo if provided
@@ -138,7 +139,6 @@ class BusinessController extends Controller
          }
 
          // Save business profile
-         $businessProfile->save();
 
          return response()->json(['message' => 'Business profile updated successfully', 'business_profile' => $businessProfile]);
      }
