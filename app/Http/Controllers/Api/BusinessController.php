@@ -53,13 +53,12 @@ class BusinessController extends Controller
           // Update photo if provided
           if ($request->file('photo')) {
             $businessProfile->updatePhoto($request->file('photo'));
-            $businessProfile->photo = $businessProfile->getPhoto();
         }  // Update logo if provided
         if ($request->file('logo')) {
             $businessProfile->updateLogo($request->file('logo'));
-            $businessProfile->logo = $businessProfile->getLogo();
         }
-
+        $businessProfile->img_photo = $businessProfile->getPhoto();
+        $businessProfile->img_logo = $businessProfile->getLogo();
         return response()->json(['message' => 'Business profile created successfully', 'business_profile' => $businessProfile], 201);
     }
     public function destroy($id)
@@ -130,17 +129,15 @@ class BusinessController extends Controller
          // Update photo if provided
          if ($request->file('photo')) {
              $businessProfile->updatePhoto($request->file('photo'));
-             $businessProfile->photo = $businessProfile->getPhoto();
          }
 
          // Update logo if provided
          if ($request->file('logo')) {
              $businessProfile->updateLogo($request->file('logo'));
-             $businessProfile->logo = $businessProfile->getLogo();
          }
 
-         // Save business profile
-
+         $businessProfile->img_photo = $businessProfile->getPhoto();
+         $businessProfile->img_logo = $businessProfile->getLogo();
          return response()->json(['business_profile' => $businessProfile]);
      }
      public function toggleStatus($id)
