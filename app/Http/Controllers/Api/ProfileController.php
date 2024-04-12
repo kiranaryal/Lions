@@ -14,80 +14,72 @@ use Illuminate\Support\Facades\Validator;
 class ProfileController extends Controller
 {
 
-    public function show($user_id)
-        {
-            $profile = Profile::where('user_id', $user_id)->first();
-            $profile->photo = $profile->getImage();
+    public function show(Request $request)
+{
+    $user = $request->user(); // This will automatically retrieve the authenticated user
+    
+    $profile = Profile::where('user_id', $user->id)->first();
+    $profile->photo = $profile->getImage();
 
-            $profileExtras = ProfileExtra::where('profile_id', $profile->id)->get()->all();
-            if($profileExtras){
-                foreach($profileExtras as $p)
-                $p->photo = $p->getImage();
-            }
-
-            if (!$profile) {
-                return response()->json(['message' => 'Profile not found'], 404);
-            }
-
-            return response()->json(['profile' => $profile,'profileExtra'=>$profileExtras], 200);
-        }
-
-
-        public function update(Request $request, $user_id)
-    {
-        if (Auth::id() != $user_id) {
-            return response()->json(['error' => 'Forbidden'], 403);
-        }
-        $user = User::findOrFail($user_id);
-
-        $validatedData = $request->validate([
-            'full_name' => 'nullable|string',
-            'position' => 'nullable|string',
-            'home_club' => 'nullable|string',
-            'public_email' => 'nullable|string|email',
-            'public_phone' => 'nullable|string',
-            'nationality' => 'nullable|string',
-            'city' => 'nullable|string',
-            'address' => 'nullable|string',
-            'about' => 'nullable|string',
-        ]);
-
-        // Update profile details
-        $profile = $user->profile;
-        $profile->update($validatedData);
-
-        return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile], 200);
+    $profileExtras = ProfileExtra::where('profile_id', $profile->id)->get();
+    foreach ($profileExtras as $p) {
+        $p->photo = $p->getImage();
     }
 
-
-    public function uploadPhoto(Request $request, $user_id)
-    {
-        if (Auth::id() != $user_id) {
-            return response()->json(['error' => 'Forbidden'], 403);
-        }
-        $input = [
-        'photo'=>$request->photo,
-        ];
-        try {
-            Validator::make($input, [
-                'photo' => 'required|image|max:2048',
-
-            ])->validate();
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
-        }
-
-        $profile = Profile::where('user_id', $user_id)->first();
-        if (!$profile) {
-            return response()->json(['error' => 'Profile not found'], 404);
-        }
-
-        $profile->updatePhoto($request->file('photo'));
-        $photoUrl = $profile->getImage();
-
-        return response()->json(['message' => 'Photo uploaded successfully', 'photo_url' => $photoUrl], 200);
+    if (!$profile) {
+        return response()->json(['message' => 'Profile not found'], 404);
     }
 
+    return response()->json(['profile' => $profile, 'profileExtra' => $profileExtras], 200);
+}
+
+public function update(Request $request)
+{
+    $user = $request->user(); // Retrieve the authenticated user
+    
+    $validatedData = $request->validate([
+        'full_name' => 'nullable|string',
+        'position' => 'nullable|string',
+        'home_club' => 'nullable|string',
+        'public_email' => 'nullable|string|email',
+        'public_phone' => 'nullable|string',
+        'nationality' => 'nullable|string',
+        'city' => 'nullable|string',
+        'address' => 'nullable|string',
+        'about' => 'nullable|string',
+    ]);
+
+    $profile = $user->profile;
+    $profile->update($validatedData);
+
+    return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile], 200);
+}
+
+public function uploadPhoto(Request $request)
+{
+    try {
+        Validator::make($request->all(), [
+            'photo' => 'required|image|max:2048',
+        ])->validate();
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json(['errors' => $e->errors()], 422);
+    }
+
+    $user = $request->user(); // Retrieve the authenticated user
+
+    $profile = Profile::where('user_id', $user->id)->first();
+    if (!$profile) {
+        return response()->json(['error' => 'Profile not found'], 404);
+    }
+
+    $profile->updatePhoto($request->file('photo'));
+    $photoUrl = $profile->getImage();
+
+    return response()->json(['message' => 'Photo uploaded successfully', 'photo_url' => $photoUrl], 200);
+}
+
+    
+    
 
     public function addProfileExtra(Request $request, $profile_id)
     {

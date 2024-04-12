@@ -11,7 +11,7 @@ class BusinessController extends Controller
 {
     public function getBusiness(){
         $business = auth()->user()->businessProfile->all();
-        return response()->json(['message' => 'Business profile retrived successfully', 'business_profile' => $business], 201);
+        return response()->json(['message' => 'Business profile retrived successfully', 'business' => $business], 201);
 
     }
     public function store(Request $request)
@@ -22,7 +22,7 @@ class BusinessController extends Controller
             'photo' => 'nullable',
             'address' => 'nullable|string',
             'city' => 'nullable|string',
-            'email' => 'nullable|email',
+            'email' => 'nullable|string|email',
             'phone' => 'nullable|string',
             'services' => 'nullable|string',
             'website' => 'nullable|string',
@@ -59,6 +59,7 @@ class BusinessController extends Controller
             $businessProfile->updateLogo($request->file('logo'));
             $businessProfile->logo = $businessProfile->getLogo();
         }
+
         return response()->json(['message' => 'Business profile created successfully', 'business_profile' => $businessProfile], 201);
     }
     public function destroy($id)
@@ -95,7 +96,7 @@ class BusinessController extends Controller
              'photo' => 'nullable',
              'address' => 'nullable|string',
              'city' => 'nullable|string',
-             'email' => 'nullable|email',
+             'email' => 'nullable|email|string',
              'phone' => 'nullable|string',
              'services' => 'nullable|string',
              'website' => 'nullable|string',
@@ -140,7 +141,7 @@ class BusinessController extends Controller
 
          // Save business profile
 
-         return response()->json(['message' => 'Business profile updated successfully', 'business_profile' => $businessProfile]);
+         return response()->json(['business_profile' => $businessProfile]);
      }
      public function toggleStatus($id)
      {
